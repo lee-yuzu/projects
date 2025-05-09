@@ -1,3 +1,11 @@
+# ====================================================
+# 개선 사항 목록
+# 1. 모델 로딩 로직을 함수로 분리하여 중복 제거 및 재사용성 향상
+# 2. DB 접속 정보(user, password 등)를 .env 파일로 분리해 보안 강화
+# 3. 라벨 리스트(labels)와 모델 리스트(model_list)를 config.py로 분리해 관리 용이성 확보
+# 4. 모델별 예측 로직을 별도 함수로 분리하여 구조화
+# ====================================================
+
 import os
 from flask import Flask, render_template, request, redirect, url_for
 from werkzeug.utils import secure_filename
