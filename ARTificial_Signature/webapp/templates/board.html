@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Art Appreciation Board</title>
+    <link href="https://fonts.googleapis.com/css2?family=Girassol&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Hahmlet&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: url('/static/images/board_background.png') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 50px;
+            font-family: 'Noto Serif KR', serif;
+        }
+
+        h1 {
+            font-family: 'Girassol', cursive;
+            font-size: 4rem;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+        }
+
+        form {
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            width: 90%;
+            max-width: 500px;
+            background: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        textarea {
+            width: 90%;
+            max-width: 463px;
+            height: 100px;
+            border-radius: 12px;
+            border: none;
+            padding: 15px;
+            font-family: 'Girassol', 'Hahmlet', serif;
+            font-size: 0.9rem;
+            resize: none;
+        }
+
+        textarea::placeholder {
+            font-size: 0.9rem;
+            color: gray;
+        }
+
+        .button-group {
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        button {
+            padding: 8px 20px;
+            font-size: 0.9em;
+            border: none;
+            background-color: rgba(255, 255, 255, 0.7);
+            color: rgb(0, 0, 0);
+            cursor: pointer;
+            border-radius: 5px;
+            font-family: 'Girassol', serif;
+            transition: all 0.3s;
+            width: 200px;
+            text-align: center;
+        }
+
+        button:hover {
+            background-color: rgba(110, 43, 52, 0.8);
+            color: white;
+        }
+
+        #board-buttons {
+            display: none;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+            gap: 8px;
+            flex-wrap: wrap;
+            opacity: 0;
+        }
+
+        /* Fade-in, Fade-out */
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .comment {
+            background: rgba(255, 255, 255, 0.85);
+            color: black;
+            width: 90%;
+            max-width: 463px;
+            min-height: 100px;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            word-break: break-word;
+            font-family: 'Girassol', 'Hahmlet', serif;
+            font-size: 0.95rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .comment small {
+            display: block;
+            margin-top: 5px;
+            color: gray;
+            font-size: 0.85rem;
+        }
+
+        /* 게시판 버튼 hover 시 살짝 커지게 */
+        #board-buttons button {
+            transition: transform 0.3s;
+        }
+
+        #board-buttons button:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>{{ board_name }}</h1>
+
+    <form method="POST">
+        <textarea name="content" placeholder="감상평을 남겨주세요" required></textarea>
+
+        <div class="button-group">
+            <button type="submit">COMMENT</button>
+
+            <!-- Go to Another Board 버튼 -->
+            <button type="button" id="go-to-board-button" onclick="toggleBoards()">Go to Another Board</button>
+
+            <!-- 새로 추가한 More about Artist 버튼 -->
+            <button type="button" onclick="window.open('{{ artist_wiki_url }}', '_blank')">More about Artist</button>
+
+            <!-- 다른 게시판 이동 버튼 -->
+            <div id="board-buttons">
+                <button type="button" onclick="location.href='{{ url_for('van_gogh_board') }}'">Vincent van Gogh</button>
+                <button type="button" onclick="location.href='{{ url_for('edgar_degas_board') }}'">Edgar Degas</button>
+                <button type="button" onclick="location.href='{{ url_for('pablo_picasso_board') }}'">Pablo Picasso</button>
+                <button type="button" onclick="location.href='{{ url_for('renoir_board') }}'">Pierre-Auguste Renoir</button>
+                <button type="button" onclick="location.href='{{ url_for('albrecht_durer_board') }}'">Albrecht Durer</button>
+            </div>
+        </div>
+    </form>
+
+    {% for comment in comments %}
+    <div class="comment">
+        <p>{{ comment.content }}</p>
+        <small>{{ comment.created_at }}</small>
+    </div>
+    {% endfor %}
+
+    <script>
+    function toggleBoards() {
+        var boardButtons = document.getElementById('board-buttons');
+        var goButton = document.getElementById('go-to-board-button');
+
+        // 게시판 버튼 보이게 하고 fade-in 애니메이션 주기
+        boardButtons.style.display = 'flex';
+        boardButtons.style.animation = 'fadeIn 0.5s forwards';
+
+        // Go to Another Board 버튼은 fade-out 하고
+        goButton.style.animation = 'fadeOut 0.5s forwards';
+
+        // 0.5초 뒤에 Go 버튼 완전히 없애기
+        setTimeout(function() {
+            goButton.style.display = 'none';
+        }, 500);
+    }
+    </script>
+
+</body>
+</html>
