@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>AutoFace</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbit&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- 처음에만 보이는 AUTO FACE 텍스트 -->
+    {% if not uploaded_image and not show_upload_box %}
+    <div id="hero" class="hero-section">
+        <h1 class="hero-text" onclick="showUploadBox()">
+            <span class="word">AUTO</span>
+            <span class="word">FACE</span>
+        </h1>
+    </div>
+    {% endif %}
+
+    <!-- 업로드 박스 -->
+    <div id="upload-box" class="upload-box {% if not uploaded_image and not show_upload_box %}hidden{% endif %}">
+        {% if not uploaded_image %}
+        <form method="POST" action="/predict" enctype="multipart/form-data">
+            <label for="image">이미지를 업로드하세요</label>
+            <input type="file" name="image" accept="image/*" required>
+            <button type="submit">업로드</button>
+        </form>
+        {% endif %}
+
+        {% if uploaded_image %}
+        <div class="result-box">
+            <h3>업로드된 이미지</h3>
+            <img src="{{ url_for('static', filename='uploads/' + uploaded_image) }}" alt="Uploaded Image">
+        </div>
+        {% endif %}
+
+        {% if predicted_brand and predicted_car_type %}
+        <div class="result-box">
+            <h3>예측 결과</h3>
+            <p><strong>브랜드:</strong> {{ predicted_brand }}</p>
+            <p><strong>차종:</strong> {{ predicted_car_type }}</p>
+        </div>
+        <form method="GET" action="/reset">
+            <button type="submit" style="margin-top: 20px; background:#761A12;">다른 차 확인하기</button>
+        </form>
+        {% endif %}
+
+        {% if error %}
+        <div class="error">{{ error }}</div>
+        {% endif %}
+    </div>
+
+    <!-- 업로드 박스 등장 스크립트 -->
+<script>
+    function showUploadBox() {
+        const hero = document.getElementById('hero');
+        const uploadBox = document.getElementById('upload-box');
+
+        hero.classList.add('fade-out');
+        setTimeout(() => {
+            hero.style.display = 'none';
+            uploadBox.classList.remove('hidden');
+            uploadBox.classList.add('fade-in');
+        }, 500);
+    }
+
+    function resetToUploadBox() {
+        const uploadBox = document.getElementById('upload-box');
+
+        // 예측 결과 제거
+        const resultBoxes = uploadBox.querySelectorAll('.result-box');
+        resultBoxes.forEach(box => box.remove());
+
+        // 업로드 폼 다시 생성
+        uploadBox.innerHTML = `
+            <form method="POST" action="/predict" enctype="multipart/form-data">
+                <label for="image">이미지를 업로드하세요</label>
+                <input type="file" name="image" accept="image/*" required>
+                <button type="submit">업로드</button>
+            </form>
+        `;
+
+        uploadBox.classList.remove('hidden');
+        uploadBox.classList.add('fade-in');
+    }
+</script>
+</body>
+</html>
