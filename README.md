@@ -17,3 +17,5 @@
 | `Diet Managers` | 개인의 건강 정보를 기반으로 저녁 식단을 추천해주는 콘솔 기반 식단 관리 프로그램   |
 | `FakeNews Detector` | 뉴스 제목을 입력하면 진위 여부를 판별해주는 LSTM 기반 AI 서비스   |
 | `IT Transition Analysis` | 비전공자의 IT 진입 과정을 교육 데이터 기반으로 분석   |
+| `K-Film Market Analysis` | 한국 영화 산업을 다양한 관점에서 분석  |
+| `Korea Tourism Analysis` | 한국 관광산업을 다양한 측면에서 분석하고 인사이트 도출  |
