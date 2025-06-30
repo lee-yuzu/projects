@@ -1,0 +1,170 @@
+/* 전체 화면 배경 */
+body {
+    margin: 0;
+    padding: 0;
+    background: url('/static/bg.jpg') no-repeat center center fixed;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 가운데 큰 텍스트와 이미지 */
+.hero-section {
+    text-align: center;
+}
+
+.hero-text {
+    display: flex;
+    justify-content: center;
+    gap: 120px;
+    font-size: 100px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.6);
+    cursor: pointer;
+}
+
+.word {
+    letter-spacing: 5px;
+}
+
+.car-img img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+
+/* 업로드 박스 스타일 */
+.upload-box {
+    position: fixed;
+    inset: 0;  /* ✅ 이 한 줄이 핵심 */
+    margin: auto;
+    height: fit-content;
+    width: fit-content;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    text-align: center;
+    z-index: 10;
+    transition: all 0.3s ease-in-out;
+}
+
+/* 숨김 처리 */
+.hidden {
+    display: none;
+}
+
+/* 업로드 안내 문구 */
+.upload-box label {
+    font-family: 'Orbit', sans-serif;  
+    font-size: 20px;
+    font-weight: bold;
+    color: #222;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* 버튼 스타일 */
+.upload-box button {
+    font-family: 'Orbit', sans-serif;
+    margin-top: 10px;
+    padding: 10px 10px;
+    background: #761A12;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* 텍스트 사라질 때 */
+.fade-out {
+    animation: fadeOut 0.5s forwards;
+}
+
+/* 업로드 박스 나타날 때 */
+.fade-in {
+    animation: fadeIn 0.5s forwards;
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; transform: scale(0.9); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+
+.container {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(6px);
+    border-radius: 16px;
+    padding: 40px;
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+}
+
+.title {
+    font-size: 40px;
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.upload-form label {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.upload-form input[type="file"] {
+    margin-bottom: 20px;
+    padding: 10px;
+    width: 100%;
+}
+
+.upload-form button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 25px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    transition: background 0.3s ease;
+}
+
+.upload-form button:hover {
+    background-color: #45a049;
+}
+
+.result-box {
+    margin-top: 30px;
+    padding: 20px;
+    background: #ffffffe6;
+    border-radius: 12px;
+}
+
+.result-box img {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+.error {
+    margin-top: 20px;
+    color: red;
+    font-weight: bold;
+}

@@ -1,0 +1,92 @@
+/* 메인 페이지 배경 스타일 */
+body.main {
+    background: url('/static/images/background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: 'Girassol', serif;
+}
+    
+
+/* 메인 페이지 제목 */
+.centered h1 {
+    font-size: 13vw; /* ✅ 줄 안 넘어가면서 꽉 차게 */
+    letter-spacing: 0.03em; /* 자간 살짝 */
+    color: white;
+    font-family: 'Girassol', serif;
+    margin: 0;
+    white-space: nowrap; /* ✅ 강제 한 줄 유지 */
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8); /* ✅ 그림자 추가 */
+}
+
+/* 메인 페이지 GO 버튼 */
+.go-button {
+    margin-top: 20px; /* 위 여백 살짝 더 줌 */
+    padding: 7px 20px;
+    font-size: 0.9em;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.7);
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    border-radius: 3px; /* 테두리 둥글기 줄임 */
+    transition: background 0.3s;
+    font-family: 'Girassol', serif;
+}
+
+.go-button:
+
+
+/* 업로드 페이지 배경 스타일 */
+body.upload-page {
+    background: url('/static/images/background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: 'Arial', sans-serif;
+
+    animation: fadeIn 1s ease-in-out; /* 👈 여기 추가 */
+}
+
+/* 업로드 페이지 컨테이너 */
+.upload-container {
+    background: rgba(255, 255, 255, 0.8); /* 반투명 흰색 박스 */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    text-align: center;
+    opacity: 0;
+    animation: fadeInUp 1s ease forwards; /* 👈 여기 추가 */
+}
+
+
+/* 페이드 인 애니메이션 */
+@keyframes 
+    
+}
+
+/* 컨테이너가 위로 부드럽게 올라오면서 나타나는 애니메이션 */
+@keyframes 
+    }
+
+@keyframes 
+     /* 위로 올라가면서 자연스럽게 사라짐 */
+}
+
+@keyframes 
+    
+}
+
+.model-name {
+    color: #6E2B34CC; /* 빨간색 (firebrick 계열, 차분하고 고급스러운 빨강) */
+    font-family: 'Girassol', serif;
+}

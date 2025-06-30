@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload Image</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        @keyframes fadeInUpload {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            opacity: 0;
+            animation: fadeInUpload 1s ease forwards;
+        }
+    </style>
+</head>
+<body class="upload-page">
+    <div class="upload-container fade-in">
+        <h2>Upload Your Masterpiece</h2>
+        <form method="POST" enctype="multipart/form-data">
+            <input type="file" name="file" accept="image/*" required><br><br>
+            <label>Select Model:</label>
+            <select name="model_choice" required>
+                <option value="resnet">ResNet18</option>
+                <option value="densenet">DenseNet121</option>
+            </select><br><br>
+            <button class="go-button" type="submit">Predict</button>
+        </form>
+
+        {% if filename %}
+            <h3>Model: {{ model_choice | capitalize }}</h3>
+            <h3>Prediction: {{ label }} ({{ confidence | round(2) }}%)</h3>
+            <img src="{{ url_for('static', filename='uploads/' + filename) }}" width="300">
+
+            <!-- 예측 결과에 따라 게시판 이동 버튼 -->
+            {% if label == 'Vincent van Gogh' %}
+                <form action="{{ url_for('van_gogh_board') }}">
+                    <button type="submit">고흐 게시판으로 이동</button>
+                </form>
+            {% elif label == 'Edgar Degas' %}
+                <form action="{{ url_for('edgar_degas_board') }}">
+                    <button type="submit">드가 게시판으로 이동</button>
+                </form>
+            {% elif label == 'Pablo Picasso' %}
+                <form action="{{ url_for('pablo_picasso_board') }}">
+                    <button type="submit">피카소 게시판으로 이동</button>
+                </form>
+            {% elif label == 'Pierre-Auguste Renoir' %}
+                <form action="{{ url_for('renoir_boad') }}">
+                    <button type="submit">르누아르 게시판으로 이동</button>
+                </form>
+            {% elif label == '5' %}
+                <form action="{{ url_for('albrecht_durer_board') }}">
+                    <button type="submit">뒤러 게시판으로 이동</button>
+                </form>
+            {% endif %}
+        {% endif %}
+    </div>
+</body>
+</html>
